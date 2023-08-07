@@ -1,0 +1,8 @@
+global:
+  hostname: example.com
+
+services:
+  - external_name: grafana
+    proxied:
+      port: 3000
+    websocket_path: /api/live/

@@ -1,0 +1,28 @@
+[tool.poetry]
+name = "nginx-configurator"
+version = "0.1.0"
+description = ""
+authors = ["Vladimir Redkin <vsredkin01@gmail.com>"]
+readme = "README.md"
+packages = [{ include = "nginx_configurator" }]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+jinja2 = "^3.1.2"
+pyyaml = "^6.0.1"
+pydantic = "^2.1.1"
+typer = "^0.9.0"
+
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.0.282"
+mypy = "^1.4.1"
+types-pyyaml = "^6.0.12.11"
+black = "^23.7.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+nginx_configurator = "nginx_configurator.cli:app"
