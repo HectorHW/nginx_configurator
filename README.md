@@ -10,7 +10,7 @@ Use poetry to run the tool: `poetry run nginx_configurator <path to config>`.
 
 ## Configuration
 
-generator is configured by supplying yaml file with following structure (**bold** indicates that field should be supplied):
+generator is configured by supplying yaml file with following structure (**bold** indicates that field must be supplied):
 
 ### global
 
