@@ -1,6 +1,6 @@
 # Nginx Configurator
 
-Nginx configuration genrator powered by jinja.
+Nginx configuration generator powered by jinja.
 
 ## Installation & Running
 
