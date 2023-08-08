@@ -20,6 +20,11 @@ class ProxiedService(BaseModel):
     host: str = "127.0.0.1"
 
 
+class RedirectService(BaseModel):
+    external_name: str
+    redirect: str
+
+
 class Service(BaseModel):
     external_name: str
     proxied: ProxiedService
@@ -28,9 +33,12 @@ class Service(BaseModel):
     additional_options: list[str] = Field(default_factory=list)
 
 
+AnyService = Service | RedirectService
+
+
 class WholeConfig(BaseModel):
     global_: Global = Field(alias="global")
-    services: list[Service]
+    services: list[AnyService]
 
 
 def parse_yaml(data: str) -> WholeConfig:

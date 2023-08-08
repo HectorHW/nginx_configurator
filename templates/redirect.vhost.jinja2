@@ -1,0 +1,19 @@
+server {
+  listen {{ global.port_number }};
+
+  client_body_timeout 5s;
+  client_header_timeout 5s;
+
+{%- if global.ssl is not none %}
+  ssl on;
+
+  ssl_protocols TLSv1.2 TLSv1.3;
+
+  ssl_certificate {{ global.ssl.certificate_path }};
+  ssl_certificate_key {{ global.ssl.key_path }};
+{% endif %}
+
+  server_name {{ service.external_name }}.{{ global.hostname }};
+
+  return 301 {{ service.redirect }};
+}

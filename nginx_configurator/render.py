@@ -5,7 +5,8 @@ template_env = jinja2.Environment(
     loader=jinja2.FileSystemLoader(searchpath="templates")
 )
 
-config_template = template_env.get_template("reverse_proxy.vhost.jinja2")
+proxy_template = template_env.get_template("reverse_proxy.vhost.jinja2")
+redirect_template = template_env.get_template("redirect.vhost.jinja2")
 
 
 def render_configurations(config: config_types.WholeConfig) -> dict[str, str]:
@@ -18,6 +19,14 @@ def render_configurations(config: config_types.WholeConfig) -> dict[str, str]:
 
 
 def render_service(
-    global_config: config_types.Global, service: config_types.Service
+    global_config: config_types.Global, service: config_types.AnyService
 ) -> str:
-    return config_template.render(**{"global": global_config, "service": service})
+    match service:
+        case config_types.Service():
+            template = proxy_template
+        case config_types.RedirectService():
+            template = redirect_template
+        case _:
+            raise NotImplementedError(service)
+
+    return template.render(**{"global": global_config, "service": service})
