@@ -17,6 +17,9 @@ server {
 
   location / {
     proxy_set_header Host $http_host;
+{%- for header,header_value in service.additional_headers.items() %}
+    proxy_set_header {{ header }} {{ header_value }};
+{% endfor %}
     proxy_pass {{ service.proxied.proto }}://{{ service.proxied.host }}:{{ service.proxied.port }};
   }
 
@@ -26,6 +29,9 @@ server {
     proxy_set_header Upgrade $http_upgrade;
     proxy_set_header Connection "upgrade";
     proxy_set_header Host $http_host;
+{%- for header,header_value in service.additional_headers.items() %}
+    proxy_set_header {{ header }} {{ header_value }};
+{% endfor %}
     proxy_pass {{ service.proxied.proto }}://{{ service.proxied.host }}:{{ service.proxied.port }};
   }
 {% endif -%}

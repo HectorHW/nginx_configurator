@@ -35,6 +35,7 @@ This section describes each service that will be proxied. Services form a list, 
   * hostname (defaults to `localhost`)
   * proto (defaults to `http`)
 * websocket_path (defaults to None) - if set, will add additional entry for websocket proxying (`Connection: Upgrade` and so on)
+* additional_headers (defaults to empty) - mapping of header to header value to be set on proxy via `proxy_set_header`
 
 Example services configuration:
 

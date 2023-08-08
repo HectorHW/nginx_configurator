@@ -24,6 +24,7 @@ class Service(BaseModel):
     external_name: str
     proxied: ProxiedService
     websocket_path: Optional[str] = None
+    additional_headers: dict[str, str] = Field(default_factory=dict)
 
 
 class WholeConfig(BaseModel):
