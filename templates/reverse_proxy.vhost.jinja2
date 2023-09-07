@@ -12,7 +12,9 @@ server {
   ssl_certificate {{ global.ssl.certificate_path }};
   ssl_certificate_key {{ global.ssl.key_path }};
 {% endif %}
-
+{%- if service.http2 %}
+  http2 on;
+{% endif %}
   server_name {{ service.external_name }}.{{ global.hostname }};
 
   location / {
