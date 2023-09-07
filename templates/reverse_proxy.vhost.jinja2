@@ -23,8 +23,11 @@ server {
 {%- for line in service.additional_options %}
     {{ line }};
 {%- endfor %}
-
+{%- if service.proxied is string %}
+    proxy_pass {{ service.proxied }};
+{% else %}
     proxy_pass {{ service.proxied.proto }}://{{ service.proxied.host }}:{{ service.proxied.port }};
+{%- endif %}
   }
 
 {% if service.websocket_path is not none -%}
